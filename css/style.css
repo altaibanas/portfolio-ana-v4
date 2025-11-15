@@ -1,0 +1,657 @@
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #00f5ff, #8a2be2, #ff00ff, #00ff87);
+            --secondary-gradient: linear-gradient(135deg, #ff00ff, #00f5ff, #8a2be2);
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --card-bg: rgba(20, 20, 40, 0.7);
+            --glow: 0 0 40px rgba(0, 245, 255, 0.7);
+            --neon-cyan: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff87;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* تأثيرات الخلفية الديناميكية */
+        .quantum-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 245, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0a0f 0%, #050508 100%);
+        }
+
+        .particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* تأثيرات النص المتقدمة */
+        .quantum-text {
+            font-size: clamp(3.5rem, 10vw, 9rem);
+            font-weight: 900;
+            background: var(--primary-gradient);
+            /* -webkit-background-clip: text; */
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .quantum-text::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            box-shadow: 0 0 25px rgba(0, 245, 255, 0.8);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.7; box-shadow: 0 0 25px rgba(0, 245, 255, 0.6); }
+            100% { opacity: 1; box-shadow: 0 0 40px rgba(0, 245, 255, 0.9); }
+        }
+
+        /* التنقل المتقدم */
+        .quantum-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .quantum-nav.scrolled {
+            background: rgba(5, 5, 8, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white;
+        }
+
+        .nav-link:hover::before, .nav-link.active::before {
+            width: 100%;
+        }
+
+        /* قسم البطل المتقدم */
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            border-radius: 50px;
+            padding: 12px 25px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-badge .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 245, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0); }
+        }
+
+        .typing-text {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: white;
+            margin: 2rem 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--neon-cyan);
+            margin-right: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* الأزرار المتقدمة */
+        .quantum-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid rgba(0, 245, 255, 0.5);
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            margin: 0 10px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quantum-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: right 0.6s ease;
+            z-index: -1;
+        }
+
+        .quantum-btn:hover::before {
+            right: 0;
+        }
+
+        .quantum-btn:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.4);
+            border-color: transparent;
+        }
+
+        /* البطاقات المتقدمة */
+        .quantum-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 245, 255, 0.25);
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .quantum-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .quantum-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--glow);
+            border-color: rgba(0, 245, 255, 0.6);
+        }
+
+        .quantum-card:hover::before {
+            opacity: 0.1;
+        }
+
+        /* الأقسام */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: 0;
+            width: 80px;
+            height: 6px;
+            background: var(--primary-gradient);
+            border-radius: 5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 6px;
+            background: var(--primary-gradient);
+            border-radius: 5px;
+        }
+
+        /* المهارات المتقدمة */
+        .skill-item {
+            margin-bottom: 30px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .skill-name {
+            font-weight: 700;
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+        }
+
+        .skill-percentage {
+            font-weight: 800;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 5px;
+            width: 0;
+            transition: width 2s ease-in-out;
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(40px); }
+        }
+
+        /* المشاريع المتقدمة */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 245, 255, 0.25);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: var(--glow);
+            border-color: rgba(0, 245, 255, 0.6);
+        }
+
+        .project-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.15);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--neon-cyan);
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .tech-tag {
+            padding: 8px 16px;
+            background: rgba(0, 245, 255, 0.15);
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(0, 245, 255, 0.15);
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            border-radius: 20px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(0, 245, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* نموذج الاتصال المتقدم */
+        .contact-form {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 18px 22px;
+            background: rgba(20, 20, 40, 0.7);
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+        }
+
+        .form-textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        /* التذييل المتقدم */
+        .quantum-footer {
+            background: var(--darker-bg);
+            border-top: 1px solid rgba(0, 245, 255, 0.3);
+            padding: 70px 0 25px;
+            position: relative;
+        }
+
+        .footer-glow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--primary-gradient);
+            box-shadow: 0 0 25px rgba(0, 245, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 245, 255, 0.15);
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            border-radius: 50%;
+            color: var(--neon-cyan);
+            font-size: 1.4rem;
+            transition: all 0.4s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 245, 255, 0.25);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.4);
+        }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quantum-btn {
+                display: block;
+                margin: 15px 0;
+                text-align: center;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .quantum-card {
+                padding: 25px;
+            }
+            
+            .hero-badge {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* تأثيرات إضافية */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            animation: float-shapes 20s infinite ease-in-out;
+        }
+
+        @keyframes float-shapes {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        /* مؤشر التمرير المخصص */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-gradient);
+        }
+    
